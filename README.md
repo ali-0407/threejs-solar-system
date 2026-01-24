@@ -9,7 +9,7 @@
 
 **A breathtaking 3D journey through our solar system and beyond**
 
-[Live Demo](#) • [Features](#-features) • [Quick Start](#-quick-start) • [Controls](#-controls)
+[Live Demo](https://solar-system-explorer-gold.vercel.app/) • [Features](#-features) • [Quick Start](#-quick-start) • [Controls](#-controls)
 
 </div>
 
