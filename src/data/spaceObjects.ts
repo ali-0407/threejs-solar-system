@@ -41,7 +41,7 @@ export const SPACE_OBJECTS_DATA: Record<string, {
   blackHole: {
     name: "Supermassive Black Hole",
     type: "Black Hole",
-    description: "A region of spacetime where gravity is so strong that nothing—no particles or even electromagnetic radiation such as light—can escape from it.",
+    description: "A region of spacetime where gravity is so strong that nothing - no particles or even electromagnetic radiation such as light - can escape from it.",
     distance: "26,000 light years (Sagittarius A*)",
     size: "24 million km diameter",
     temperature: "Near absolute zero (Hawking radiation)",

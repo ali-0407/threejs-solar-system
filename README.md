@@ -17,7 +17,7 @@
 
 ## ✨ What Makes This Special?
 
-Ever wanted to explore space from your browser? This isn't just another solar system visualization—it's an **interactive cosmic playground** where you can:
+Ever wanted to explore space from your browser? This isn't just another solar system visualization - it's an **interactive cosmic playground** where you can:
 
 - 🪐 **Explore all 8 planets** with scientifically accurate orbital mechanics
 - 🌈 **Switch between 8 stunning space themes** (from Classic Dark to Aurora Green)
@@ -145,7 +145,7 @@ npm run preview
 ## 🎯 Usage Tips
 
 1. **Start Slow**: Begin with 1x speed to appreciate the orbital mechanics
-2. **Explore Themes**: Try different color palettes—each creates a unique atmosphere
+2. **Explore Themes**: Try different color palettes - each creates a unique atmosphere
 3. **Hide Clutter**: Toggle off space objects for a cleaner view of the solar system
 4. **Learn**: Click everything! Each object has fascinating information
 5. **Find Hidden Details**: Zoom in close to planets to see surface details and atmospheres
