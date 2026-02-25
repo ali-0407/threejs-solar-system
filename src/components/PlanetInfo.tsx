@@ -103,47 +103,47 @@ export function PlanetInfo({ planetName, onClose, accentColor }: PlanetInfoProps
 
   return (
     <div 
-      className="absolute bottom-4 right-4 w-96 bg-black/70 backdrop-blur-xl rounded-2xl p-5 text-white border border-white/10 shadow-2xl animate-fade-in"
+      className="ui-panel glass-panel absolute bottom-5 right-5 w-80 p-5 text-white rounded-2xl shadow-2xl animate-slide-up"
       style={{ 
-        boxShadow: `0 0 40px ${accentColor}20`,
-        borderColor: `${accentColor}30`
+        boxShadow: `0 0 32px ${accentColor}15`,
+        borderColor: `${accentColor}25`
       }}
     >
       <div className="flex justify-between items-start mb-4">
         <div>
           <h2 
-            className="text-2xl font-bold"
+            className="text-xl font-bold tracking-tight"
             style={{ color: accentColor }}
           >
             {planetName}
           </h2>
-          <p className="text-xs opacity-50 uppercase tracking-wider">Planet Profile</p>
+          <p className="text-[11px] font-medium uppercase tracking-widest text-white/40 mt-0.5">Planet</p>
         </div>
         <button
           onClick={onClose}
-          className="text-white/40 hover:text-white transition-colors text-xl p-1 hover:bg-white/10 rounded-lg"
+          className="p-2 text-white/40 hover:text-white rounded-lg hover:bg-white/10"
         >
-          ✕
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
       
-      <p className="text-gray-300 text-sm mb-4 leading-relaxed">{info.description}</p>
+      <p className="text-white/75 text-[13px] mb-4 leading-relaxed">{info.description}</p>
       
-      <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+      <div className="grid grid-cols-2 gap-2 text-[13px] mb-4">
         <InfoCard label="Diameter" value={info.diameter} />
-        <InfoCard label="Day Length" value={info.dayLength} />
-        <InfoCard label="Year Length" value={info.yearLength} />
+        <InfoCard label="Day" value={info.dayLength} />
+        <InfoCard label="Year" value={info.yearLength} />
         <InfoCard label="Moons" value={info.moons.toString()} />
-        <InfoCard label="Temperature" value={info.temperature} />
+        <InfoCard label="Temp" value={info.temperature} />
         <InfoCard label="Composition" value={info.composition} />
       </div>
 
       <div 
-        className="p-3 rounded-xl text-sm"
-        style={{ backgroundColor: `${accentColor}15` }}
+        className="p-3 rounded-xl text-[13px]"
+        style={{ backgroundColor: `${accentColor}12`, border: `1px solid ${accentColor}25` }}
       >
-        <span className="text-xs uppercase tracking-wider opacity-60">Fun Fact</span>
-        <p className="mt-1" style={{ color: accentColor }}>{info.funFact}</p>
+        <span className="text-[11px] font-medium uppercase tracking-widest text-white/45">Fun fact</span>
+        <p className="mt-1 font-medium" style={{ color: accentColor }}>{info.funFact}</p>
       </div>
     </div>
   );
@@ -151,9 +151,9 @@ export function PlanetInfo({ planetName, onClose, accentColor }: PlanetInfoProps
 
 function InfoCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-      <div className="text-white/40 text-xs uppercase tracking-wider">{label}</div>
-      <div className="font-medium mt-0.5">{value}</div>
+    <div className="bg-white/5 border border-white/5 p-2.5 rounded-xl">
+      <div className="text-[11px] font-medium uppercase tracking-widest text-white/40">{label}</div>
+      <div className="font-medium mt-0.5 text-white/90 text-[13px]">{value}</div>
     </div>
   );
 }

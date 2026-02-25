@@ -194,21 +194,23 @@ export function App() {
       </Canvas>
       
       {/* UI Overlay - Title */}
-      <div className="absolute top-4 left-4 text-white">
-        <h1 className="text-4xl font-bold mb-1 tracking-tight">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r" 
-                style={{ backgroundImage: `linear-gradient(to right, ${palette.accent}, ${palette.stars})` }}>
-            Solar System
-          </span>
+      <div className="absolute top-5 left-5 z-10">
+        <h1 
+          className="text-3xl font-bold tracking-tight text-white/95"
+          style={{ 
+            textShadow: `0 0 40px ${palette.accent}40`,
+            fontFamily: 'var(--font-sans)'
+          }}
+        >
+          Solar System Explorer
         </h1>
-        <p className="text-sm opacity-60">Interactive 3D Space Exploration</p>
+        <p className="text-[13px] text-white/50 mt-0.5 tracking-wide">Interactive 3D · React + Three.js</p>
       </div>
 
       {/* Main Controls Panel */}
-      <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-xl p-5 rounded-2xl text-white border border-white/10 space-y-4 w-80">
-        {/* Time Speed */}
+      <div className="ui-panel glass-panel absolute bottom-5 left-5 p-5 text-white w-72 space-y-4">
         <div>
-          <label className="block text-xs uppercase tracking-wider opacity-60 mb-2">Time Speed</label>
+          <label className="block text-[11px] font-medium uppercase tracking-widest text-white/45 mb-2">Time Speed</label>
           <div className="flex items-center gap-3">
             <input
               type="range"
@@ -217,81 +219,74 @@ export function App() {
               step="0.1"
               value={speedMultiplier}
               onChange={(e) => setSpeedMultiplier(parseFloat(e.target.value))}
-              className="flex-1 accent-current h-2 rounded-full"
+              className="flex-1 h-1.5 rounded-full"
               style={{ accentColor: palette.accent }}
             />
-            <span className="text-sm font-mono w-12 text-right">{speedMultiplier.toFixed(1)}x</span>
+            <span className="text-xs font-mono tabular-nums w-10 text-right text-white/70">{speedMultiplier.toFixed(1)}×</span>
           </div>
         </div>
 
-        {/* Space Theme Button */}
         <div>
-          <label className="block text-xs uppercase tracking-wider opacity-60 mb-2">Space Theme</label>
+          <label className="block text-[11px] font-medium uppercase tracking-widest text-white/45 mb-2">Theme</label>
           <button
             onClick={() => setShowThemeModal(true)}
-            className="w-full px-4 py-3 rounded-lg text-sm font-medium transition-all relative overflow-hidden group"
+            className="ui-btn w-full px-4 py-2.5 rounded-xl text-sm font-medium text-left flex items-center justify-between"
             style={{ 
-              background: `linear-gradient(135deg, ${palette.bg} 0%, ${palette.nebula} 50%, ${palette.accent} 100%)`
+              backgroundColor: `${palette.accent}18`,
+              borderColor: `${palette.accent}40`,
+              border: `1px solid ${palette.accent}40`
             }}
           >
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-            <div className="relative flex items-center justify-between">
-              <span className="flex items-center gap-2">
-                <span>🎨</span>
-                <span>{palette.name}</span>
-              </span>
-              <span className="text-xs opacity-60 bg-black/30 px-2 py-1 rounded">Change</span>
-            </div>
+            <span>{palette.name}</span>
+            <span className="text-[10px] uppercase tracking-wider text-white/50">Change</span>
           </button>
         </div>
 
-        {/* Toggle Buttons */}
         <div className="flex gap-2">
           <button
             onClick={() => setShowOrbits(!showOrbits)}
-            className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`ui-btn flex-1 px-3 py-2 rounded-xl text-xs font-medium ${
               showOrbits 
-                ? 'bg-white/20 border border-white/30' 
-                : 'bg-white/5 border border-white/10 opacity-60'
+                ? 'bg-white/15 border border-white/25' 
+                : 'bg-white/5 border border-white/10 text-white/60'
             }`}
           >
             {showOrbits ? '◉' : '○'} Orbits
           </button>
           <button
             onClick={() => setShowLabels(!showLabels)}
-            className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`ui-btn flex-1 px-3 py-2 rounded-xl text-xs font-medium ${
               showLabels 
-                ? 'bg-white/20 border border-white/30' 
-                : 'bg-white/5 border border-white/10 opacity-60'
+                ? 'bg-white/15 border border-white/25' 
+                : 'bg-white/5 border border-white/10 text-white/60'
             }`}
           >
             {showLabels ? '◉' : '○'} Labels
           </button>
         </div>
 
-        {/* Space Objects Toggle */}
         <button
           onClick={() => setShowSpacePanel(!showSpacePanel)}
-          className="w-full px-4 py-2 rounded-lg text-sm font-medium bg-gradient-to-r from-purple-600/50 to-blue-600/50 border border-white/20 hover:border-white/40 transition-all flex items-center justify-center gap-2"
+          className="ui-btn w-full px-4 py-2.5 rounded-xl text-sm font-medium border border-white/15 hover:border-white/30 flex items-center justify-center gap-2"
+          style={{ backgroundColor: `${palette.accent}12` }}
         >
-          <span>🌌</span>
           <span>Space Objects</span>
-          <span className={`transition-transform ${showSpacePanel ? 'rotate-180' : ''}`}>▼</span>
+          <span className={`text-[10px] transition-transform ${showSpacePanel ? 'rotate-180' : ''}`}>▼</span>
         </button>
       </div>
 
       {/* Space Objects Panel */}
       {showSpacePanel && (
-        <div className="absolute bottom-4 left-[22rem] bg-black/70 backdrop-blur-xl p-5 rounded-2xl text-white border border-white/10 w-64 animate-fade-in">
-          <h3 className="text-xs uppercase tracking-wider opacity-60 mb-3">Toggle Space Objects</h3>
-          <div className="space-y-2">
+        <div className="ui-panel glass-panel absolute bottom-5 left-[19rem] p-5 text-white w-60 animate-fade-in">
+          <h3 className="text-[11px] font-medium uppercase tracking-widest text-white/45 mb-3">Space Objects</h3>
+          <div className="space-y-1.5">
             {[
-              { key: 'milkyWay', label: 'Milky Way Galaxy', icon: '🌌' },
+              { key: 'milkyWay', label: 'Milky Way', icon: '🌌' },
               { key: 'starClusters', label: 'Star Clusters', icon: '✨' },
-              { key: 'wormhole', label: 'Wormhole', icon: '🕳️' },
+              { key: 'wormhole', label: 'Wormhole', icon: '🕳' },
               { key: 'blackHole', label: 'Black Hole', icon: '⚫' },
-              { key: 'comets', label: 'Comets', icon: '☄️' },
-              { key: 'nebula', label: 'Nebulae', icon: '🌫️' },
+              { key: 'comets', label: 'Comets', icon: '☄' },
+              { key: 'nebula', label: 'Nebulae', icon: '🌫' },
               { key: 'pulsar', label: 'Pulsar', icon: '💫' },
               { key: 'shootingStars', label: 'Shooting Stars', icon: '🌠' },
               { key: 'distantGalaxies', label: 'Distant Galaxies', icon: '🔭' },
@@ -299,16 +294,16 @@ export function App() {
               <button
                 key={key}
                 onClick={() => toggleSpaceObject(key as keyof SpaceObjectVisibility)}
-                className={`w-full px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
+                className={`ui-btn w-full px-3 py-2 rounded-xl text-sm font-medium flex items-center gap-2 ${
                   spaceObjects[key as keyof SpaceObjectVisibility]
-                    ? 'bg-white/20 border border-white/30' 
-                    : 'bg-white/5 border border-white/10 opacity-60'
+                    ? 'bg-white/15 border border-white/20' 
+                    : 'bg-white/5 border border-white/10 text-white/60'
                 }`}
               >
-                <span>{icon}</span>
+                <span className="text-base">{icon}</span>
                 <span className="flex-1 text-left">{label}</span>
-                <span className="text-xs opacity-60">
-                  {spaceObjects[key as keyof SpaceObjectVisibility] ? 'ON' : 'OFF'}
+                <span className="text-[10px] uppercase text-white/40">
+                  {spaceObjects[key as keyof SpaceObjectVisibility] ? 'On' : 'Off'}
                 </span>
               </button>
             ))}
@@ -337,8 +332,8 @@ export function App() {
       {/* Legend Toggle Button */}
       <button
         onClick={() => setShowLegends(!showLegends)}
-        className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 transition-all"
-        title={showLegends ? "Hide Legends" : "Show Legends"}
+        className="ui-btn absolute top-5 right-5 z-10 p-2.5 rounded-xl glass-panel text-white hover:bg-white/10"
+        title={showLegends ? "Hide legends" : "Show legends"}
       >
         {showLegends ? (
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -350,10 +345,9 @@ export function App() {
       {/* Legends Container */}
       {showLegends && (
         <div className="animate-fade-in">
-          {/* Planet Legend */}
-          <div className="absolute top-16 right-4 bg-black/60 backdrop-blur-md p-4 rounded-2xl text-white border border-white/10 text-sm w-48">
-            <h3 className="font-semibold mb-3 text-xs uppercase tracking-wider opacity-60">Planets</h3>
-            <div className="space-y-2">
+          <div className="ui-panel glass-panel absolute top-16 right-5 p-4 text-white text-sm w-44">
+            <h3 className="text-[11px] font-medium uppercase tracking-widest text-white/45 mb-3">Planets</h3>
+            <div className="space-y-1">
               {[
                 { name: 'Mercury', color: '#B5B5B5' },
                 { name: 'Venus', color: '#E6C87A' },
@@ -367,30 +361,26 @@ export function App() {
                 <button
                   key={name}
                   onClick={() => setSelectedPlanet(name)}
-                  className="flex items-center gap-2 w-full hover:bg-white/10 px-2 py-1 rounded-lg transition-all"
+                  className="ui-btn flex items-center gap-2 w-full px-2 py-1.5 rounded-lg hover:bg-white/10 text-left"
                 >
                   <div 
-                    className="w-3 h-3 rounded-full shadow-lg"
-                    style={{ 
-                      backgroundColor: color,
-                      boxShadow: `0 0 8px ${color}60`
-                    }}
+                    className="w-2.5 h-2.5 rounded-full shrink-0"
+                    style={{ backgroundColor: color, boxShadow: `0 0 6px ${color}80` }}
                   />
-                  <span className="opacity-80">{name}</span>
+                  <span className="text-white/85 text-[13px]">{name}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Space Objects Legend */}
-          <div className="absolute top-[380px] right-4 bg-black/60 backdrop-blur-md p-4 rounded-2xl text-white border border-white/10 text-sm w-48">
-            <h3 className="font-semibold mb-3 text-xs uppercase tracking-wider opacity-60">Space Objects</h3>
-            <div className="space-y-1 text-xs opacity-70">
-              <p>🌌 Milky Way (background)</p>
-              <p>🕳️ Wormhole (left)</p>
-              <p>⚫ Black Hole (right)</p>
-              <p>💫 Pulsar (top left)</p>
-              <p>☄️ Comets (orbiting)</p>
+          <div className="ui-panel glass-panel absolute top-[22rem] right-5 p-4 text-white text-[13px] w-44">
+            <h3 className="text-[11px] font-medium uppercase tracking-widest text-white/45 mb-2">Space Objects</h3>
+            <div className="space-y-1 text-white/55">
+              <p>🌌 Milky Way</p>
+              <p>🕳 Wormhole</p>
+              <p>⚫ Black Hole</p>
+              <p>💫 Pulsar</p>
+              <p>☄ Comets</p>
             </div>
           </div>
         </div>
@@ -398,19 +388,19 @@ export function App() {
 
       {/* Theme Modal */}
       {showThemeModal && (
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-gray-900 border border-white/10 rounded-3xl p-6 max-w-2xl w-full relative shadow-2xl">
+        <div className="ui-modal absolute inset-0 bg-black/75 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="glass-panel border-white/10 rounded-2xl p-6 max-w-2xl w-full relative text-white shadow-2xl">
             <button 
               onClick={() => setShowThemeModal(false)}
-              className="absolute top-4 right-4 text-white/50 hover:text-white p-2"
+              className="absolute top-4 right-4 p-2 text-white/50 hover:text-white rounded-lg hover:bg-white/10"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
             
-            <h2 className="text-2xl font-bold text-white mb-2">Choose Space Theme</h2>
-            <p className="text-white/60 mb-6">Select a color palette to customize your cosmic journey.</p>
+            <h2 className="text-xl font-bold mb-1">Choose theme</h2>
+            <p className="text-white/55 text-sm mb-6">Pick a color palette for the scene.</p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {SPACE_PALETTES.map((p, i) => (
                 <button
                   key={p.name}
@@ -418,34 +408,31 @@ export function App() {
                     setPaletteIndex(i);
                     setShowThemeModal(false);
                   }}
-                  className={`group relative aspect-video rounded-xl overflow-hidden transition-all duration-300 ${
-                    i === paletteIndex ? 'ring-2 ring-white scale-105' : 'hover:scale-105 hover:ring-1 hover:ring-white/50'
+                  className={`ui-btn group relative aspect-video rounded-xl overflow-hidden ${
+                    i === paletteIndex ? 'ring-2 ring-white ring-offset-2 ring-offset-black/50' : 'hover:ring-1 hover:ring-white/40'
                   }`}
                 >
                   <div 
                     className="absolute inset-0"
-                    style={{ 
-                      background: `linear-gradient(135deg, ${p.bg} 0%, ${p.nebula} 50%, ${p.accent} 100%)` 
-                    }}
+                    style={{ background: `linear-gradient(135deg, ${p.bg} 0%, ${p.nebula} 50%, ${p.accent} 100%)` }}
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent">
-                    <span className="text-white font-medium text-sm">{p.name}</span>
+                  <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/70 to-transparent">
+                    <span className="text-white font-medium text-[13px]">{p.name}</span>
                   </div>
-                  
                   {i === paletteIndex && (
-                    <div className="absolute top-2 right-2 bg-white text-black rounded-full p-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-white flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                   )}
                 </button>
               ))}
             </div>
             
-            <div className="mt-6 flex justify-end">
+            <div className="mt-5 flex justify-end">
               <button
                 onClick={() => setShowThemeModal(false)}
-                className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                className="ui-btn px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-sm font-medium"
               >
                 Close
               </button>
@@ -455,11 +442,9 @@ export function App() {
       )}
 
       {/* Instructions */}
-      <div className="absolute bottom-4 right-4 text-white/40 text-xs text-right space-y-1">
-        <p>🖱️ Drag to rotate view</p>
-        <p>🔍 Scroll to zoom in/out</p>
-        <p>👆 Click planet for details</p>
-        <p>🎮 Use controls to customize</p>
+      <div className="absolute bottom-5 right-5 text-white/35 text-[11px] text-right space-y-0.5 tracking-wide">
+        <p>Drag to rotate · Scroll to zoom</p>
+        <p>Click a planet or object for details</p>
       </div>
     </div>
   );
